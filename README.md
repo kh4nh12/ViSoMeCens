@@ -11,7 +11,7 @@ Please use the *.ipynb files in these folders to execute.
 # Further Usage
 For any usage related to all codes and data used from our repository, please cite our following paper:
 ```
-@inproceedings{tran-etal-2022-hsd-vietnamese,
+@article{tran-etal-2022-hsd-vietnamese,
     title = "Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data",
     author = "Tran, Khanh Quoc  and
       Nguyen, An Trong  and
