@@ -7,6 +7,9 @@ The paper is available at:
 Please use the *.ipynb files in these folders to execute.
 
 # References
+1. PhoBERT: Pre-trained language models for Vietnamese - https://github.com/VinAIResearch/PhoBERT
+2. Convolutional Neural Networks for Sentence Classification - https://github.com/yoonkim/CNN_sentence
+3. Apache spark: a unified engine for big data processing - https://spark.apache.org/docs/3.1.1
 
 # Further Usage
 For any usage related to all codes and data used from our repository, please cite our following paper:
