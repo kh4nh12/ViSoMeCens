@@ -22,9 +22,7 @@ For any usage related to all codes and data used from our repository, please cit
       Luu, Canh Duc and
       Do, Trong-Hop and
       Nguyen, Kiet Van",
-    journal = "Neural Computing and Applications",
     year = "2022",
-    publisher = {Springer},
 }
 ```
 
