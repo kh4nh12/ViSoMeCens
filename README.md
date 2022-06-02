@@ -14,15 +14,13 @@ Please use the *.ipynb files in these folders to execute.
 # Further Usage
 For any usage related to all codes and data used from our repository, please cite our following paper:
 ```
-@article{tran-etal-2022-hsd-vietnamese,
-    title = "Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data",
-    author = "Tran, Khanh Quoc  and
-      Nguyen, An Trong  and
-      Hoang, Phu Gia and
-      Luu, Canh Duc and
-      Do, Trong-Hop and
-      Nguyen, Kiet Van",
-    year = "2022",
+@misc{tran2022vietnamese,
+      title={Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data}, 
+      author={Khanh Q. Tran and An T. Nguyen and Phu Gia Hoang and Canh Duc Luu and Trong-Hop Do and Kiet Van Nguyen},
+      year={2022},
+      eprint={2206.00524},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 ```
 
