@@ -1,6 +1,6 @@
 # ViSoMeCens: Vietnamese Social Media Censorship Application
 
-This repository is used to store the codes of our paper "Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data", which is published in the journal "Neural Computing and Applications".
+This repository is used to store the codes of our paper "Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data".
 
 The paper is available at: https://arxiv.org/abs/2206.00524
 
