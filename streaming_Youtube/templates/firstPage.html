@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hate Speech Detection Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://daa.uit.edu.vn/favicon.ico" type="image/vnd.microsoft.icon">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        font-size: 16px;
+        font-family: "PT Sans", sans-serif;
+      }
+
+      body {
+        background-color: white;
+      }
+
+      /* custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 20px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #d6dee1;
+        border-radius: 20px;
+        border: 6px solid transparent;
+        background-clip: content-box;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #a8bbbf;
+      }
+
+      tr:nth-child(even) {
+        background-color: #c4cfde5c;
+      }
+    </style>
+  </head>
+
+  <body class="container bg-gray-200">
+    <div class="bg-white rounded-xl my-3 py-3">
+      <h1
+        class="font-medium leading-tight text-center text-5xl mt-0 mb-2 text-blue-600"
+      >
+        Hate Speech Detection Dashboard
+      </h1>
+
+      <h4
+        class="text-center font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600"
+      >
+        <text class="mr-2">Youtube URL: </text>
+        <text><u>{{data}}</u></text>
+      </h4>
+    </div>
+
+
+    <!-- ----------------------------------------------------------------------- -->
+    <!--                              Bang to nhat                               -->
+    <!-- ----------------------------------------------------------------------- -->
+    <div class="bg-white rounded-xl p-5 mt-5">
+      <h5 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">
+        Hate Speech Comments
+      </h5>
+
+      <div class="flex justify-center mx-auto w-full">
+        <div class="w-full flex flex-col">
+          <div
+            class="border-b border-gray-200 shadow"
+            style="max-height: 300px; overflow-y: scroll"
+          >
+            <table class="table-fixed" id="comments-table">
+              <thead class="" style="background-color: #6B7175">
+                <tr class="">
+                  <th class="px-6 py-2 text-xs text-white">User</th>
+                  <th class="px-6 py-2 text-xs text-white">Timestamp</th>
+                  <th class="w-full px-6 py-2 text-xs text-white">Comment</th>
+                  <th class="px-6 py-2 text-xs text-white">Sentiment</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white">
+                <tr class="whitespace-nowrap">
+                  <td class="px-6 py-4">
+                    <div
+                      class="text-sm text-gray-900"
+                      id="comments-table-user"
+                      style="width: 150px"
+                    ></div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div
+                      class="text-sm text-gray-900"
+                      id="comments-table-timestamp"
+                      style="width: 150px"
+                    ></div>
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 w-full"
+                    id="comments-table-comment"
+                  ></td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900"
+                    id="comments-table-sentiment"
+                    style="width: 150px"
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-row w-full mt-5">
+      <!-- ----------------------------------------------------------------------- -->
+      <!--                            Thong ke comment                             -->
+      <!-- ----------------------------------------------------------------------- -->
+      <div
+        class="flex flex-col bg-white p-5 mr-10 rounded-xl mb-auto"
+        style="width: 370px"
+      >
+        <!--<h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">
+          Comment counter
+        </h5>-->
+        <!-- ---------------------------- Total comment ---------------------------- -->
+        <div
+          class="flex flex-col items-center border-2 w-32 h-24 rounded-lg shadow-lg mb-2"
+          style="background-color: #6B7175"
+        >
+          <text class="mt-4 text-l text-white">Total comments</text>
+          <div
+            class="flex flex-1 flex-col justify-center items-center text-3xl text-white"
+            id="totalcomments"
+          ></div>
+        </div>
+        <!-- -------------------------------- Clean -------------------------------- -->
+        <div
+          class="flex flex-col items-center border-2 w-32 h-24 rounded-lg shadow-lg mb-2"
+          style="background-color: #17A589"
+        >
+          <text class="mt-4 text-l text-white">#Clean</text>
+          <div
+            class="flex flex-1 flex-col justify-center items-center text-3xl text-white"
+            id="cleancomments"
+          ></div>
+        </div>
+        <!-- ------------------------------ Offensive ------------------------------ -->
+        <div
+          class="flex flex-col items-center border-2 w-32 h-24 rounded-lg shadow-lg mb-2"
+          style="background-color: #F4D03F"
+        >
+          <text class="mt-4 text-l text-white">#Offensive</text>
+          <div
+            class="flex flex-1 flex-col justify-center items-center text-3xl text-white"
+            id="offensivecomments"
+          ></div>
+        </div>
+        <!-- -------------------------------- Hate --------------------------------- -->
+        <div
+          class="flex flex-col items-center border-2 w-32 h-24 rounded-lg shadow-lg mb-2"
+          style="background-color: #C0392B "
+        >
+          <text class="mt-4 text-l text-white">#Hate</text>
+          <div
+            class="flex flex-1 flex-col justify-center items-center text-3xl text-white"
+            id="hatecomments"
+          ></div>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------------------- -->
+      <!--                             Chart hinh tron                             -->
+      <!-- ----------------------------------------------------------------------- -->
+      <div
+        class="flex h-40 bg-white rounded-xl mr-10 p-5"
+        style=" width: 600px; height: 456px;"
+      >
+        <div id="divChart">
+          <h5 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">
+            Percentage of labels
+          </h5>
+          <canvas
+            id="myPieChart"
+            width="450"
+            height="390"
+            class="chartjs-render-monitor"
+            style="display: block; width: 450px; height: 390px"
+          ></canvas>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------------------- -->
+      <!--                          User with hate speech                          -->
+      <!-- ----------------------------------------------------------------------- -->
+      <div class="flex flex-col w-full rounded-xl bg-white p-5 mb-auto">
+        <h5 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">
+          Users with hate speech
+        </h5>
+
+        <div class="flex justify-center mx-auto w-full">
+          <div class="w-full flex flex-col">
+            <div class="w-full">
+              <div
+                class="border-b border-gray-300 shadow"
+                style="max-height: 400px; overflow-y: scroll"
+              >
+                <table class="table-fixed" id="usermosthsd">
+                  <thead class="bg-gray-50" style="background-color: #6B7175">
+                    <tr>
+                      <th class="w-1\/2 px-6 py-2 text-xs text-white">User</th>
+                      <th class="w-1\/2 px-6 py-2 text-xs text-white">
+                        HateSpeech
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white">
+                    <tr class="whitespace-nowrap">
+                      <td class="px-6 py-4" style="width: 100px">
+                        <div class="text-sm text-gray-900" id="uhs_user">
+                        </div>
+                      </td>
+                      <td class="px-6 py-4 w-full">
+                        <div class="text-sm text-gray-900" id="uhs_count">
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------------------------------------------------------- -->
+      <!--                          Tên Người thực hiện                            -->
+      <!-- ----------------------------------------------------------------------- -->
+    </div>
+    <div class="flex w-full rounded-xl bg-white p-5 mb-auto my-5 justify-between mb-10">
+      <div  class="">
+        <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">
+          Khóa luận tốt nghiệp Ngành Khoa học Dữ liệu
+        </h5>
+			<p><b>SVTH</b>: Trần Quốc Khánh - Nguyễn Trọng Ân</p>
+			<p><b>GVHD</b>: ThS. Nguyễn Văn Kiệt - TS. Đỗ Trọng Hợp</p>
+      </div>
+      <div class="" style="width: 356px">
+       <img src="https://i.ibb.co/kyXgBrF/img.png" alt="img" border="0" />
+
+      </div>
+    </div>
+
+    <div style="height: 50px;"></div>
+
+    <script>
+      // Init variables
+      var total_comments = 0;
+      var hate_comments = 0;
+      var offensive_comments = 0;
+      var clean_comments = 0;
+      var label = [];
+      var xData = [hate_comments, offensive_comments, clean_comments];
+      var barColors = ["#C0392B", "#F4D03F", "#17A589"];
+      var myPieChart = new Chart("myPieChart", {
+        animationEnabled: true,
+        type: "pie",
+        data: {
+          yValueFormatString: '##0.00"%"',
+          indexLabel: "{label} {y}",
+          labels: ["Hate", "Offensive", "Clean"],
+          datasets: [
+            {
+              label: "My First Dataset",
+              data: xData,
+              backgroundColor: barColors,
+              hoverOffset: 4,
+            },
+          ],
+        },
+      });
+
+      // SSE
+      var source = new EventSource("/table-data");
+      source.addEventListener(
+        "message",
+        function (e) {
+          console.log(e.data);
+        },
+        false
+      );
+
+      source.addEventListener(
+        "open",
+        function (e) {
+          // Connection was opened.
+        },
+        false
+      );
+
+      source.addEventListener(
+        "error",
+        function (e) {
+          if (e.readyState == EventSource.CLOSED) {
+            // Connection was closed.
+          }
+        },
+        false
+      );
+      source.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+
+        // HSD_dataframe data
+        if (Object.keys(data).length > 3) {
+          // Count total comments.
+          total_comments += 1;
+          document.getElementById("totalcomments").innerHTML = total_comments;
+
+          // Add comments to table
+          var table = document.getElementById("comments-table");
+          var row = table.insertRow(1);
+          row.insertCell(0).innerHTML = data.user;
+          row.insertCell(1).innerHTML = data.timestamp;
+          row.insertCell(2).innerHTML = data.raw_comment;
+          int_label = parseInt(data.label, 10);
+          if (int_label == 0) {
+            row.insertCell(3).innerHTML = "CLEAN";
+          } else if (int_label == 1) {
+            row.insertCell(3).innerHTML = "OFFENSIVE";
+          } else {
+            row.insertCell(3).innerHTML = "HATE";
+          }
+
+          if (int_label !== 0) {
+            // Add comments to table
+            var table1 = document.getElementById("usermosthsd");
+            var row1 = table1.insertRow(1);
+            row1.insertCell(0).innerHTML = data.user;
+            row1.insertCell(1).innerHTML = data.clean_comment;
+          }
+        } else if (Object.keys(data).length == 2) {
+          // HSD count dataframe data
+          if (data.sentiment.localeCompare("CLEAN") == 0) {
+            clean_comments = parseInt(data.count);
+            document.getElementById("cleancomments").innerHTML = clean_comments;
+          } else if (data.sentiment.localeCompare("OFFENSIVE") == 0) {
+            offensive_comments = parseInt(data.count);
+            document.getElementById("offensivecomments").innerHTML =
+              offensive_comments;
+          } else {
+            hate_comments = parseInt(data.count);
+            document.getElementById("hatecomments").innerHTML = hate_comments;
+          }
+          var flag = total_comments % 5;
+          if (flag == 0) {
+            xData = [hate_comments, offensive_comments, clean_comments];
+            myPieChart.data.datasets[0].data = xData;
+            myPieChart.update();
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
