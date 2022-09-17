@@ -17,11 +17,12 @@ For any usage related to all codes and data used from our repository, please cit
 @misc{tran2022vietnamese,
       title={Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data}, 
       author={Khanh Q. Tran and An T. Nguyen and Phu Gia Hoang and Canh Duc Luu and Trong-Hop Do and Kiet Van Nguyen},
+      journal={Neural Computing and Applications},
       year={2022},
-      eprint={2206.00524},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      publisher={Springer}
+      doi="https://doi.org/10.1007/s00521-022-07745-w"
 }
+
 ```
 
 For any questions, please contact our corresponding author: Mr. Khanh Quoc Tran at 18520908@gm.uit.edu.vn.
