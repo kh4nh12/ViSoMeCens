@@ -14,13 +14,15 @@ Please use the *.ipynb files in these folders to execute.
 # Further Usage
 For any usage related to all codes and data used from our repository, please cite our following paper:
 ```
-@misc{tran2022vietnamese,
-      title={Vietnamese Hate and Offensive Detection using PhoBERT-CNN and Social Media Streaming Data}, 
-      author={Khanh Q. Tran and An T. Nguyen and Phu Gia Hoang and Canh Duc Luu and Trong-Hop Do and Kiet Van Nguyen},
-      journal={Neural Computing and Applications},
-      year={2022},
-      publisher={Springer}
-      doi="https://doi.org/10.1007/s00521-022-07745-w"
+@article{quoc2023vietnamese,
+  title={Vietnamese hate and offensive detection using PhoBERT-CNN and social media streaming data},
+  author={Quoc Tran, Khanh and Trong Nguyen, An and Hoang, Phu Gia and Luu, Canh Duc and Do, Trong-Hop and Van Nguyen, Kiet},
+  journal={Neural Computing and Applications},
+  volume={35},
+  number={1},
+  pages={573--594},
+  year={2023},
+  publisher={Springer}
 }
 
 ```
